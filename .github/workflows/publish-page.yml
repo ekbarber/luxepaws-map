@@ -33,14 +33,16 @@ jobs:
       - uses: actions/setup-node@v4
       - run: "yarn"
       - run: "yarn webpack"
-
-    #   - name: Setup Pages
-    #     uses: actions/configure-pages@v4
-    #   - name: Upload artifact
-    #     uses: actions/upload-pages-artifact@v3
-    #     with:
-    #       # Upload entire repository
-    #       path: '.'
-    #   - name: Deploy to GitHub Pages
-    #     id: deployment
-    #     uses: actions/deploy-pages@v4
+      - run: "mkdir static"
+      - run: "mv dist static/dist"
+      - run: "mv index.html static"
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Upload entire repository
+          path: "static"
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
