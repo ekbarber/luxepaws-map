@@ -32,7 +32,7 @@
           },
           "configurations": {
             "production": {
-              "baseHref": "/luxepaws-map",
+              "baseHref": "https://ekbarber.github.io/luxepaws-map/",
               "budgets": [
                 {
                   "type": "initial",
