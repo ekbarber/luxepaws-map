@@ -32,17 +32,13 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
       - run: "yarn"
-      - run: "yarn webpack"
-      - run: "mkdir static"
-      - run: "mv dist static/dist"
-      - run: "mv index.html static"
+      - run: "yarn build"
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
-          path: "static"
+          path: "dist/luxepaws-map/browser"
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
