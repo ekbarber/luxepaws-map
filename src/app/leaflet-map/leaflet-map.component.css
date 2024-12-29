@@ -1,17 +1,21 @@
+.container{
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
 .map-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: 30px;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.map {
+  height: 100%;
+  width: 100%;
 }
 
-.map-frame {
-  border: 2px solid black;
-  height: 100%;
-}
-
-#map {
-  height: 100%;
+.footer-container {
+  background-color: #f2f2f2;
+  padding: 10px;
+  text-align: center;
 }

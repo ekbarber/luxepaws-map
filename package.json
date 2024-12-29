@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "geocode": "tsc scripts/geocoder/Geocoder.ts"
   },
   "private": true,
   "dependencies": {
@@ -18,9 +19,11 @@
     "@angular/platform-browser": "^17.0.0",
     "@angular/platform-browser-dynamic": "^17.0.0",
     "@angular/router": "^17.0.0",
-    "axios": "^1.7.2",
+    "axios": "^1.7.9",
+    "debug": "^4.4.0",
     "leaflet": "~1.9.4",
     "lodash": "^4.17.21",
+    "luxon": "^3.5.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.2"
@@ -29,14 +32,18 @@
     "@angular-devkit/build-angular": "^17.0.9",
     "@angular/cli": "^17.0.9",
     "@angular/compiler-cli": "^17.0.0",
+    "@types/debug": "^4.1.12",
     "@types/jasmine": "~5.1.0",
     "@types/leaflet": "^1.9.8",
+    "@types/lodash": "^4.17.13",
+    "@types/luxon": "^3.4.2",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "tsx": "^4.19.2",
     "typescript": "~5.2.2"
   }
 }
