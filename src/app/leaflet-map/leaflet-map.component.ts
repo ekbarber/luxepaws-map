@@ -10,7 +10,7 @@ interface VoucherDatastore {
   fixedCats: Record<string, VoucherData>;
 }
 
-const DTLA_LAT_LNG = new L.LatLng(34.0401279, -118.2895712);
+const DTLA_LAT_LNG = new L.LatLng(34.0543296, -118.2455678);
 @Component({
   selector: 'app-leaflet-map',
   standalone: true,
@@ -22,6 +22,9 @@ export class LeafletMapComponent implements AfterViewInit {
   @ViewChild('map') private mapContainer!: ElementRef;
   private map: L.Map | undefined;
   lastUpdated: string = '';
+  totalCats: number = 0;
+  startDate: string | undefined = '';
+  endDate: string | undefined = '';
 
   constructor(private http: HttpClient) {}
 
@@ -74,6 +77,13 @@ export class LeafletMapComponent implements AfterViewInit {
           this.lastUpdated = DateTime.fromISO(
             response.lastModified
           ).toLocaleString();
+          this.totalCats = _.size(response.fixedCats);
+          const dates = _.chain(response.fixedCats)
+            .values()
+            .map((fixedCat) => DateTime.fromISO(fixedCat.dateIssued))
+            .value();
+          this.startDate = _.min(dates)?.toLocaleString();
+          this.endDate = _.max(dates)?.toLocaleString();
           resolve(
             _.values(response.fixedCats).map(
               (voucherData) => new Voucher(voucherData)
