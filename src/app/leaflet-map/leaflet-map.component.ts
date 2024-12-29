@@ -67,7 +67,7 @@ export class LeafletMapComponent implements AfterViewInit {
   private async getData(): Promise<Voucher[]> {
     return new Promise<Voucher[]>((resolve, reject) => {
       const data = this.http
-        .get<VoucherDatastore>('/assets/fixed-cats.json')
+        .get<VoucherDatastore>('./assets/fixed-cats.json')
         .subscribe((response) => {
           this.lastUpdated = DateTime.fromISO(
             response.lastModified
