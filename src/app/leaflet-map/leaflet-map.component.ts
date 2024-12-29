@@ -60,7 +60,9 @@ export class LeafletMapComponent implements AfterViewInit {
         console.warn(err);
       }
 
-      marker.bindPopup(`<b>${item.colonyLocation}</b><br>${item.dateIssued}`);
+      marker.bindPopup(
+        `<b>${item.colonyLocation}</b><br>${item.dateIssued.toLocaleString()}`
+      );
     });
     this.map.fitBounds(bounds, { padding: [20, 20] });
   }
