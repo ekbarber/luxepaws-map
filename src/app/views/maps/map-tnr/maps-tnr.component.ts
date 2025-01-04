@@ -32,7 +32,7 @@ const DEFAULT_ZOOM = 17;
 export class MapsTnrComponent implements AfterContentInit, OnDestroy {
   private map!: L.Map;
   private catSubscription: Subscription;
-  private markers: L.Marker[] = [];
+  private markers: Array<L.Marker | L.CircleMarker> = [];
   private cats: FixedCat[] = [];
 
   constructor(
@@ -55,10 +55,28 @@ export class MapsTnrComponent implements AfterContentInit, OnDestroy {
     // Add new markers
     cats.forEach((cat) => {
       if (_.isNil(cat.latLng)) return;
-      const marker = L.marker({
-        lat: cat.latLng.latitude,
-        lng: cat.latLng.longitude,
-      })
+
+      const customIcon = L.divIcon({
+        className: 'custom-div-icon',
+        html: `<div class='marker-pin'></div>`,
+        iconSize: [30, 42],
+        iconAnchor: [15, 42],
+      });
+
+      const marker = L.circleMarker(
+        {
+          lat: cat.latLng.latitude,
+          lng: cat.latLng.longitude,
+        },
+        {
+          radius: 6,
+          fillColor: '#746E6C',
+          color: '#000',
+          weight: 1,
+          opacity: 1,
+          fillOpacity: 0.8,
+        }
+      )
         .bindPopup(
           `Location: ${
             cat.colonyLocation

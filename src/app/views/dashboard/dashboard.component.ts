@@ -86,7 +86,6 @@ export class DashboardComponent implements OnInit {
   constructor(private catDataService: CatDataService) {
     this.catDataService.cats$.subscribe((cats) => {
       // You can now use the cats data to update your charts
-      console.log('Cats data received:', cats);
     });
   }
 
