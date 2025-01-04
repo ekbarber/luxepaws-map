@@ -19,7 +19,7 @@ interface Location {
 
 const TILE_LAYER = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 const CENTER: [number, number] = [34.053718, -118.2452282];
-const DEFAULT_ZOOM = 17;
+const DEFAULT_ZOOM = 14;
 
 @Component({
   selector: 'maps-tnr',
