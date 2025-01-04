@@ -7,6 +7,9 @@ import {
 } from '@angular/core';
 import { CardBodyComponent, CardComponent } from '@coreui/angular';
 import * as L from 'leaflet';
+import { CatDataService, FixedCat } from '../../../services/cat-data.service';
+import { Subscription } from 'rxjs';
+import _ from 'lodash';
 
 interface Location {
   latitude: number;
@@ -28,13 +31,43 @@ const DEFAULT_ZOOM = 17;
 })
 export class MapsTnrComponent implements AfterContentInit, OnDestroy {
   private map!: L.Map;
-  private readonly locations: Location[] = [
-    { latitude: 40.7128, longitude: -74.006, name: 'New York' },
-    { latitude: 34.0522, longitude: -118.2437, name: 'Los Angeles' },
-    { latitude: 41.8781, longitude: -87.6298, name: 'Chicago' },
-  ];
+  private catSubscription: Subscription;
+  private markers: L.Marker[] = [];
+  private cats: FixedCat[] = [];
 
-  constructor(private changeDetectorRef: ChangeDetectorRef) {}
+  constructor(
+    private changeDetectorRef: ChangeDetectorRef,
+    private catDataService: CatDataService
+  ) {
+    this.catSubscription = this.catDataService.cats$.subscribe((cats) => {
+      this.cats = cats;
+      if (this.map) {
+        this.updateMarkers(cats);
+      }
+    });
+  }
+
+  private updateMarkers(cats: FixedCat[]): void {
+    // Clear existing markers
+    this.markers.forEach((marker) => marker.remove());
+    this.markers = [];
+
+    // Add new markers
+    cats.forEach((cat) => {
+      if (_.isNil(cat.latLng)) return;
+      const marker = L.marker({
+        lat: cat.latLng.latitude,
+        lng: cat.latLng.longitude,
+      })
+        .bindPopup(
+          `Location: ${
+            cat.colonyLocation
+          }<br>Date: ${cat.dateIssued.toLocaleString()}`
+        )
+        .addTo(this.map);
+      this.markers.push(marker);
+    });
+  }
 
   private initMap(): void {
     if (!this.map) {
@@ -47,16 +80,12 @@ export class MapsTnrComponent implements AfterContentInit, OnDestroy {
         attribution: '© OpenStreetMap contributors',
       }).addTo(this.map);
 
-      this.locations.forEach((location) => {
-        L.marker([location.latitude, location.longitude])
-          .bindPopup(location.name)
-          .addTo(this.map);
-      });
-
       // Force a resize after map creation
       requestAnimationFrame(() => {
         this.map.invalidateSize();
       });
+      // Add initial markers
+      this.updateMarkers(this.cats);
     }
   }
 
@@ -72,5 +101,6 @@ export class MapsTnrComponent implements AfterContentInit, OnDestroy {
     if (this.map) {
       this.map.remove();
     }
+    this.catSubscription.unsubscribe();
   }
 }

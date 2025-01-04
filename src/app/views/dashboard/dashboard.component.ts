@@ -35,6 +35,7 @@ import { WidgetsBrandComponent } from '../widgets/widgets-brand/widgets-brand.co
 import { WidgetsDropdownComponent } from '../widgets/widgets-dropdown/widgets-dropdown.component';
 import { MapsTnrComponent } from '../maps/map-tnr/maps-tnr.component';
 import { DashboardChartsData, IChartProps } from './dashboard-charts-data';
+import { CatDataService } from '../../services/cat-data.service';
 
 @Component({
   templateUrl: 'dashboard.component.html',
@@ -81,6 +82,13 @@ export class DashboardComponent implements OnInit {
   public trafficRadioGroup = new FormGroup({
     trafficRadio: new FormControl('Month'),
   });
+
+  constructor(private catDataService: CatDataService) {
+    this.catDataService.cats$.subscribe((cats) => {
+      // You can now use the cats data to update your charts
+      console.log('Cats data received:', cats);
+    });
+  }
 
   ngOnInit(): void {
     this.initCharts();
