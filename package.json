@@ -1,13 +1,12 @@
 {
-  "name": "luxepaws-map",
+  "name": "luxepaws",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "geocode": "tsc scripts/geocoder/Geocoder.ts"
+    "test": "ng test"
   },
   "private": true,
   "dependencies": {
@@ -17,49 +16,29 @@
     "@angular/compiler": "^19.0.5",
     "@angular/core": "^19.0.5",
     "@angular/forms": "^19.0.5",
-    "@angular/language-service": "^19.0.5",
     "@angular/platform-browser": "^19.0.5",
     "@angular/platform-browser-dynamic": "^19.0.5",
     "@angular/router": "^19.0.5",
-    "@coreui/angular": "~5.3.4",
-    "@coreui/angular-chartjs": "~5.3.4",
-    "@coreui/chartjs": "~4.0.0",
-    "@coreui/coreui": "~5.2.0",
-    "@coreui/icons": "^3.0.1",
-    "@coreui/icons-angular": "~5.3.4",
-    "@coreui/utils": "^2.0.2",
-    "axios": "^1.7.9",
-    "chart.js": "^4.4.7",
-    "debug": "^4.4.0",
-    "leaflet": "~1.9.4",
-    "lodash": "^4.17.21",
-    "lodash-es": "^4.17.21",
-    "luxon": "^3.5.0",
-    "ngx-scrollbar": "^13.0.3",
+    "@primeng/themes": "^19.0.2",
+    "primeng": "^19.0.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
-    "zone.js": "~0.14.2"
+    "vite": "^6.0.7",
+    "zone.js": "~0.15.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^19.0.6",
     "@angular/cli": "^19.0.6",
     "@angular/compiler-cli": "^19.0.5",
-    "@angular/localize": "^19.0.5",
-    "@types/debug": "^4.1.12",
     "@types/jasmine": "~5.1.0",
-    "@types/leaflet": "^1.9.8",
-    "@types/lodash": "^4.17.13",
-    "@types/lodash-es": "^4.17.12",
-    "@types/luxon": "^3.4.2",
-    "@types/node": "^22.10.1",
+    "@types/node": "^22.10.5",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "tsx": "^4.19.2",
-    "typescript": "5.5"
+    "typescript": "~5.6"
   },
-  "packageManager": "yarn@1.22.21"
+  "packageManager": "yarn@1.22.21+sha1.1959a18351b811cdeedbd484a8f86c3cc3bbaf72"
 }
