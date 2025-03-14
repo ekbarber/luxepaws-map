@@ -9,6 +9,7 @@
   display: flex;
   gap: 1rem;
   margin-bottom: 1rem;
+  max-width: 100%;
 }
 
 .stats-container {
@@ -21,6 +22,7 @@
 .chart-container {
   flex: 1;
   min-height: 200px;
+  max-width: calc(100% - 250px - 1rem); // Subtract stats width and gap
 }
 
 :host ::ng-deep .chart-card {
@@ -197,6 +199,7 @@
 
   .chart-container {
     min-height: 250px;
+    max-width: 100%;
   }
 }
 

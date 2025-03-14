@@ -30,7 +30,7 @@ const DEFAULT_ZOOM = 14;
             <i class="pi pi-database"></i>
           </div>
           <div class="stats-content">
-            <div class="stats-title">Total Cats</div>
+            <div class="stats-title">Total TNRs</div>
             <div class="stats-value">{{ totalCats }}</div>
           </div>
         </p-card>
@@ -40,7 +40,7 @@ const DEFAULT_ZOOM = 14;
             <i class="pi pi-filter"></i>
           </div>
           <div class="stats-content">
-            <div class="stats-title">Filtered Cats</div>
+            <div class="stats-title">Currently Visible TNRs</div>
             <div class="stats-value">{{ filteredCats }}</div>
           </div>
         </p-card>
@@ -48,7 +48,6 @@ const DEFAULT_ZOOM = 14;
 
       <div class="chart-container">
         <p-card styleClass="chart-card">
-          <div class="chart-title">Cats Over Time</div>
           <p-chart
             type="line"
             [data]="chartData"
