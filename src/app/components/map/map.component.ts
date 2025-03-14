@@ -13,6 +13,7 @@ import { Card } from 'primeng/card';
 import { Slider } from 'primeng/slider';
 import { FormsModule } from '@angular/forms';
 import { DateTime } from 'luxon';
+import { CommonModule } from '@angular/common';
 
 const TILE_LAYER = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 const CENTER: [number, number] = [34.053718, -118.2452282];
@@ -21,6 +22,28 @@ const DEFAULT_ZOOM = 14;
 @Component({
   selector: 'map',
   template: `
+    <div class="stats-container">
+      <p-card styleClass="stats-card">
+        <div class="stats-icon">
+          <i class="pi pi-database"></i>
+        </div>
+        <div class="stats-content">
+          <div class="stats-title">Total Cats</div>
+          <div class="stats-value">{{ totalCats }}</div>
+        </div>
+      </p-card>
+
+      <p-card styleClass="stats-card">
+        <div class="stats-icon">
+          <i class="pi pi-filter"></i>
+        </div>
+        <div class="stats-content">
+          <div class="stats-title">Filtered Cats</div>
+          <div class="stats-value">{{ filteredCats }}</div>
+        </div>
+      </p-card>
+    </div>
+
     <p-card>
       <div class="filter-controls">
         <div class="slider-container">
@@ -44,7 +67,7 @@ const DEFAULT_ZOOM = 14;
   styleUrls: ['./map.component.scss'],
   changeDetection: ChangeDetectionStrategy.Default,
   standalone: true,
-  imports: [Card, Slider, FormsModule],
+  imports: [Card, Slider, FormsModule, CommonModule],
 })
 export class MapComponent implements AfterContentInit, OnDestroy {
   private map!: L.Map;
@@ -56,6 +79,10 @@ export class MapComponent implements AfterContentInit, OnDestroy {
   selectedStartDate: DateTime | null = null;
   selectedEndDate: DateTime | null = null;
 
+  // Statistics properties
+  totalCats: number = 0;
+  filteredCats: number = 0;
+
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
     private catDataService: CatDataService
@@ -63,14 +90,18 @@ export class MapComponent implements AfterContentInit, OnDestroy {
     console.log('MapComponent constructor');
     this.catSubscription = this.catDataService.cats$.subscribe((cats) => {
       this.cats = cats;
+      this.totalCats = cats.length;
       this.initializeDateRange(cats);
+      const filteredCats = this.filterCatsByDateRange(cats);
+      this.filteredCats = filteredCats.length;
       if (this.map) {
-        this.updateMarkers(this.filterCatsByDateRange(cats));
+        this.updateMarkers(filteredCats);
       }
     });
   }
   ngAfterContentInit(): void {
-    throw new Error('Method not implemented.');
+    // Initialize the component after content init
+    console.log('MapComponent ngAfterContentInit');
   }
 
   private initializeDateRange(cats: FixedCat[]): void {
@@ -105,7 +136,9 @@ export class MapComponent implements AfterContentInit, OnDestroy {
 
   onRangeChange(event: any): void {
     this.updateSelectedDatesFromRange();
-    this.updateMarkers(this.filterCatsByDateRange(this.cats));
+    const filteredCats = this.filterCatsByDateRange(this.cats);
+    this.filteredCats = filteredCats.length;
+    this.updateMarkers(filteredCats);
   }
 
   private filterCatsByDateRange(cats: FixedCat[]): FixedCat[] {

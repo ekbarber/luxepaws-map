@@ -2,8 +2,13 @@
 :root {
   --primary-color: #000000;
   --secondary-color: #52c2c8;
-  --text-color: #999999;
-  --font-family: 'Fjalla One';
+  --text-color: #666666;
+  --light-bg: #f8f9fa;
+  --border-radius: 8px;
+  --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+  --font-family-heading: 'Fjalla One', sans-serif;
+  --font-family-body: 'Libre Franklin', 'Roboto', sans-serif;
 }
 
 /* Global Styles */
@@ -12,15 +17,29 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
-  font-family: var(--font-family);
+  font-family: var(--font-family-body);
   color: var(--text-color);
-  background-color: #fff;
+  background-color: var(--light-bg);
+  line-height: 1.6;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-family-heading);
+  margin-top: 0;
+  color: var(--primary-color);
 }
 
 /* Leaflet Container */
 .leaflet-container {
   height: 100%;
   width: 100%;
+  border-radius: var(--border-radius);
+  overflow: hidden;
 }
 
 /* Button Styles */
@@ -28,68 +47,71 @@ button {
   background-color: var(--primary-color);
   color: #fff;
   border: none;
-  border-radius: 5px;
+  border-radius: var(--border-radius);
   padding: 10px 20px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: var(--transition);
+  font-family: var(--font-family-body);
+  font-weight: 500;
 }
 
 button:hover {
-  background-color: #3da7ad;
-}
-
-/* New Layout Styles */
-
-/* Header & Footer */
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem;
-  background-color: var(--primary-color);
-  color: white;
-}
-
-.nav a {
-  color: white;
-  margin-left: 1rem;
-  text-decoration: none;
-}
-
-.footer {
-  text-align: center;
-  padding: 1rem;
-  background-color: #eee;
-}
-
-/* Layout structure */
-.layout {
-  display: flex;
-  min-height: calc(100vh - 140px);
-}
-
-.sidebar {
-  width: 200px;
-  background-color: #f7f7f7;
-  padding: 1rem;
-}
-
-.main-content {
-  flex-grow: 1;
-  padding: 1rem;
+  background-color: #333;
+  transform: translateY(-2px);
+  box-shadow: var(--box-shadow);
 }
 
 /* Card component */
 .card {
   background-color: #fff;
-  border: 1px solid #eee;
-  border-radius: 8px;
-  padding: 1rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-bottom: 1rem;
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  box-shadow: var(--box-shadow);
+  margin-bottom: 1.5rem;
+  transition: var(--transition);
 }
 
-/* Specific containers */
-.map-container {
-  margin-bottom: 1rem;
+.card:hover {
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* PrimeNG Customizations */
+:root {
+  --surface-a: #ffffff;
+  --surface-b: var(--light-bg);
+  --surface-c: #eff3f8;
+  --surface-d: #e9ecef;
+  --surface-e: #ffffff;
+  --surface-f: #ffffff;
+  --text-color: var(--text-color);
+  --text-color-secondary: #6c757d;
+  --primary-color: var(--primary-color);
+  --primary-color-text: #ffffff;
+  --font-family: var(--font-family-body);
+  --border-radius: var(--border-radius);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .card {
+    padding: 1rem;
+  }
+
+  button {
+    padding: 8px 16px;
+  }
 }
