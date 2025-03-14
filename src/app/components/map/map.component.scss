@@ -109,14 +109,21 @@
 }
 
 :host ::ng-deep .p-card {
-  height: 100%;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   overflow: hidden;
 
   .p-card-content {
-    height: 100%;
     padding: 0;
+  }
+}
+
+// Special styling for the map card to prevent it from expanding too much
+:host ::ng-deep p-card:last-child .p-card {
+  max-height: 600px;
+
+  .p-card-content {
+    max-height: 550px;
   }
 }
 
@@ -156,7 +163,7 @@
 }
 
 #map {
-  height: 600px;
+  height: 500px;
   width: 100%;
   border-radius: 0 0 8px 8px;
 }
