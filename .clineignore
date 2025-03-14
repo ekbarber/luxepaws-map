@@ -27,4 +27,5 @@ coverage/
 *.lcov
 
 data/*.json
+src/assets/fixed-cats.json
 

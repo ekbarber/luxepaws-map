@@ -4,18 +4,134 @@
   width: 100%;
 }
 
-:host ::ng-deep .p-card {
+// Stats and chart container styles
+.stats-and-chart-container {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  max-width: 100%;
+}
+
+.stats-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 250px;
+}
+
+.chart-container {
+  flex: 1;
+  min-height: 200px;
+  max-width: calc(100% - 250px - 1rem); // Subtract stats width and gap
+}
+
+:host ::ng-deep .chart-card {
   height: 100%;
 
+  .p-card-body,
   .p-card-content {
     height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .chart-title {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    padding: 0 0.5rem;
+  }
+
+  p-chart {
+    flex: 1;
+    display: block;
+    height: 100%;
+    min-height: 180px;
+  }
+}
+
+:host ::ng-deep .stats-card {
+  display: flex;
+  padding: 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .p-card-body {
     padding: 0;
+    display: flex;
+    width: 100%;
+  }
+
+  .p-card-content {
+    padding: 0;
+    display: flex;
+    width: 100%;
+  }
+}
+
+.stats-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--secondary-color);
+  color: white;
+  padding: 1rem;
+  font-size: 1.5rem;
+  min-width: 60px;
+}
+
+.stats-content {
+  flex: 1;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.stats-title {
+  font-size: 0.9rem;
+  color: var(--text-color);
+  margin-bottom: 0.25rem;
+}
+
+.stats-value {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+:host ::ng-deep .p-card {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+
+  .p-card-content {
+    padding: 0;
+  }
+}
+
+// Special styling for the map card to prevent it from expanding too much
+:host ::ng-deep p-card:last-child .p-card {
+  max-height: 600px;
+
+  .p-card-content {
+    max-height: 550px;
   }
 }
 
 .filter-controls {
   margin-bottom: 1rem;
-  padding: 0 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #f8f9fa;
+  border-radius: 8px 8px 0 0;
 }
 
 .slider-container {
@@ -47,8 +163,9 @@
 }
 
 #map {
-  height: 600px;
+  height: 500px;
   width: 100%;
+  border-radius: 0 0 8px 8px;
 }
 
 .marker-pin {
@@ -57,4 +174,48 @@
   border-radius: 50%;
   background: #746e6c;
   border: 1px solid #000;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s;
+}
+
+:host ::ng-deep .leaflet-marker-icon:hover .marker-pin,
+:host ::ng-deep .leaflet-marker-icon:focus .marker-pin {
+  transform: scale(1.2);
+}
+
+:host ::ng-deep .leaflet-popup-content-wrapper {
+  border-radius: 8px;
+  box-shadow: 0 3px 14px rgba(0, 0, 0, 0.2);
+}
+
+:host ::ng-deep .leaflet-popup-content {
+  margin: 0.5rem 0.75rem;
+  line-height: 1.5;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .stats-and-chart-container {
+    flex-direction: column;
+  }
+
+  .stats-container {
+    flex-direction: row;
+    width: 100%;
+  }
+
+  .chart-container {
+    min-height: 250px;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+  .stats-container {
+    flex-direction: column;
+  }
+
+  .chart-container {
+    min-height: 200px;
+  }
 }
