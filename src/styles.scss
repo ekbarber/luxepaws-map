@@ -35,5 +35,61 @@ button {
 }
 
 button:hover {
-  background-color: #3da7ad; /* Slightly darker shade for hover */
+  background-color: #3da7ad;
+}
+
+/* New Layout Styles */
+
+/* Header & Footer */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.nav a {
+  color: white;
+  margin-left: 1rem;
+  text-decoration: none;
+}
+
+.footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: #eee;
+}
+
+/* Layout structure */
+.layout {
+  display: flex;
+  min-height: calc(100vh - 140px);
+}
+
+.sidebar {
+  width: 200px;
+  background-color: #f7f7f7;
+  padding: 1rem;
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 1rem;
+}
+
+/* Card component */
+.card {
+  background-color: #fff;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
+}
+
+/* Specific containers */
+.map-container {
+  margin-bottom: 1rem;
 }

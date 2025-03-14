@@ -60,6 +60,7 @@ export class MapComponent implements AfterContentInit, OnDestroy {
     private changeDetectorRef: ChangeDetectorRef,
     private catDataService: CatDataService
   ) {
+    console.log('MapComponent constructor');
     this.catSubscription = this.catDataService.cats$.subscribe((cats) => {
       this.cats = cats;
       this.initializeDateRange(cats);
@@ -67,6 +68,9 @@ export class MapComponent implements AfterContentInit, OnDestroy {
         this.updateMarkers(this.filterCatsByDateRange(cats));
       }
     });
+  }
+  ngAfterContentInit(): void {
+    throw new Error('Method not implemented.');
   }
 
   private initializeDateRange(cats: FixedCat[]): void {
@@ -157,6 +161,7 @@ export class MapComponent implements AfterContentInit, OnDestroy {
   }
 
   private initMap(): void {
+    console.log('Initializing map');
     if (!this.map) {
       this.map = L.map('map', {
         center: CENTER,
@@ -176,7 +181,8 @@ export class MapComponent implements AfterContentInit, OnDestroy {
     }
   }
 
-  ngAfterContentInit(): void {
+  ngAfterViewInit(): void {
+    console.log('MapComponent ngAfterViewInit');
     const me = this;
     setTimeout(() => {
       me.initMap();
